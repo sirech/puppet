@@ -7,3 +7,9 @@
 [submodule "modules/python"]
 	path = modules/python
 	url = git://github.com/stankevich/puppet-python.git
+[submodule "modules/nodejs"]
+	path = modules/nodejs
+	url = git://github.com/puppetlabs/puppetlabs-nodejs.git
+[submodule "modules/stdlib"]
+	path = modules/stdlib
+	url = git://github.com/puppetlabs/puppetlabs-stdlib.git
