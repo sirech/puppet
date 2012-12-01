@@ -19,9 +19,6 @@ get a _VM_ running:
 
 * Prepare _VM_
 
-    # The first two steps might be not necessary
-    vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
-    vagrant init lucid32
     vagrant up
     
 * Connect to the _VM_
