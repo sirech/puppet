@@ -1,4 +1,4 @@
 import "server"
 
-node lucid32 inherits server { 
+node precise32 inherits server { 
 }
