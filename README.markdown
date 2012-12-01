@@ -24,3 +24,8 @@ get a _VM_ running:
 * Connect to the _VM_
 
     vagrant ssh
+
+### Annoying stuff
+
+* Sometimes you have to manually call `sudo apt-get update` on the
+remote server before some packages work again

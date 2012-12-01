@@ -6,4 +6,6 @@ node server inherits basenode {
   class { 'nodejs':
     dev_package => true
   }
+
+  include nginx
 }
