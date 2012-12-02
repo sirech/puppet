@@ -1,0 +1,8 @@
+description "Start the auto-complete-server Node.js app"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+chdir <%= directory %>/stock-display/auto-complete-server
+exec sudo -u <%= user %> NODE_ENV=production /usr/bin/node server.js >> log/node.log 2>&1
+respawn

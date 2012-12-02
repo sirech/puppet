@@ -12,7 +12,6 @@ node precise32 inherits server {
   file { '/srv/www/main':
     ensure => 'directory',
     owner => 'sirech',
-    before => Nginx::Resource::Vhost['hceris.com'],
   }
 
   # images
@@ -25,17 +24,22 @@ node precise32 inherits server {
   file { '/srv/www/images':
     ensure => 'directory',
     owner => 'sirech',
-    before => Nginx::Resource::Vhost['images.hceris.com'],
   }
 
   file { '/srv/www':
     ensure => 'directory',
+    owner => 'sirech'
   }
 
   user { 'sirech':
-    groups => ['adm', 'sudo'],
     ensure => 'present',
+    groups => ['adm', 'sudo'],   
+    managehome => true,
   }
 
-  User['sirech'] -> File['/srv/www'] -> File['/srv/www/main']
+  User['sirech'] -> File['/srv/www'] -> File['/srv/www/main'] -> File['/srv/www/images']
+
+  # Auto complete NodeJS app
+  class { 'auto-complete':
+  }
 }
