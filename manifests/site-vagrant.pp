@@ -33,7 +33,7 @@ node precise32 inherits server {
 
   user { 'sirech':
     ensure => 'present',
-    groups => ['adm', 'sudo'],   
+    groups => ['adm', 'sudo'],
     managehome => true,
   }
 
@@ -41,5 +41,9 @@ node precise32 inherits server {
 
   # Auto complete NodeJS app
   class { 'auto-complete':
+  }
+
+  # shell
+  class { 'shell':
   }
 }
