@@ -1,0 +1,12 @@
+server {
+  server_name <%= name %>;
+
+  access_log <%= scope.lookupvar('nginx::log_dir')%>/<%= name %>.access.log;
+  error_log <%= scope.lookupvar('nginx::log_dir')%>/<%= name %>.error.log;
+ 
+  location / {
+    include uwsgi_params;
+    uwsgi_pass 127.0.0.1:<%= port %>;
+    uwsgi_modifier1 30;
+  }
+}

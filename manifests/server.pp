@@ -8,4 +8,9 @@ node server inherits basenode {
   }
 
   include nginx
+
+  class { 'python':
+    version => '2.7',
+    virtualenv => true,
+  }
 }

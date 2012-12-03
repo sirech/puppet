@@ -1,0 +1,16 @@
+<uwsgi>
+    <uid>uwsgi</uid>
+    <gid>uwsgi</gid>
+    <plugin>python</plugin>
+    <socket>127.0.0.1:<%= port %></socket>
+    <wsgi-file><%= wiki %>/moin.wsgi</wsgi-file>
+    <limit-as>256</limit-as>
+    <processes>1</processes>
+    <memory-report/>
+    <vhost/>
+    <no-site/>
+    <enable-threads/>
+    <master/>
+    <harakiri>120</harakiri>
+    <autoload/>
+</uwsgi>

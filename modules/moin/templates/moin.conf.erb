@@ -1,0 +1,8 @@
+description "moin uwsgi service"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+chdir <%= wiki %>/
+exec uwsgi -x <%= wiki %>/uwsgi.xml
+respawn

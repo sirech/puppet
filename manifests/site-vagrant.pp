@@ -46,4 +46,8 @@ node precise32 inherits server {
   # shell
   class { 'shell':
   }
+
+  # MoinMoin wiki
+  class { 'moin':
+  }
 }
