@@ -1,2 +1,4 @@
 .vagrant
 modules/moin/manifests/settings.pp
+modules/deliver/files/members.json
+modules/deliver/files/config.py

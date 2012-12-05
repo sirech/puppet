@@ -1,6 +1,11 @@
 import "base"
 
 node server inherits basenode {
+
+  package { 'build-essential':
+    ensure => present,
+  }
+
   include ntp
 
   class { 'nodejs':
@@ -11,6 +16,7 @@ node server inherits basenode {
 
   class { 'python':
     version => '2.7',
+    dev => true,
     virtualenv => true,
   }
 
@@ -61,5 +67,9 @@ node server inherits basenode {
 
   # MoinMoin wiki
   class { 'moin':
+  }
+
+  # Deliver mailing list
+  class { 'deliver':
   }
 }

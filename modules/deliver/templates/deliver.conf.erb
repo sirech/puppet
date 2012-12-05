@@ -1,0 +1,8 @@
+description "Starts deliver"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+chdir <%= live %>/
+exec sudo -u <%= runner %> <%= virtualenv %>/bin/python updater.py
+respawn
