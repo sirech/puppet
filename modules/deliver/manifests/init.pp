@@ -2,7 +2,7 @@ class deliver (
   $user = 'sirech',
   $runner = 'deliver',
   $directory = '/srv/mail/deliver'
-  ) {
+  ) inherits deliver::settings {
 
     $code = "$directory/deliver"
     $live = "$directory/live"
@@ -46,7 +46,7 @@ class deliver (
       require => File['/srv/mail']
     }
 
-    # DB
+    # Python packages
 
     package { 'libpq-dev':
       ensure => present,
@@ -142,6 +142,15 @@ class deliver (
         require => File[$live]
     }
 
+    # DB
+    class { 'postgresql::server':
+    }
+
+    postgresql::db { $db_name:
+      user => $db_user,
+      password => $db_password,
+    }
+      
     # service { 'deliver':
     #   ensure => 'running',
     #   require => ...

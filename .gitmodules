@@ -22,3 +22,6 @@
 [submodule "modules/python"]
 	path = modules/python
 	url = git@github.com:sirech/puppet-python.git
+[submodule "modules/postgresql"]
+	path = modules/postgresql
+	url = git://github.com/puppetlabs/puppet-postgresql.git
