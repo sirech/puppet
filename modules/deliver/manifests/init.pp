@@ -29,9 +29,28 @@ class deliver (
 
     # Directories
     user { $runner:
-      ensure => 'present',
+      ensure => 'present'
     }
 
+    user { $mail_sender:
+      ensure => 'present',
+      managehome => true,
+      password => $mail_password_hash
+    }
+
+    $maildir = "/home/$mail_sender/Maildir"
+    file { $maildir:
+      ensure => 'directory',
+      owner => $mail_sender,
+      require => User[$mail_sender]
+    }
+
+    file { [ "$maildir/cur", "$maildir/new", "$maildir/old" ]:
+      ensure => 'directory',
+      owner => $mail_sender,
+      require => File[$maildir]
+    }
+      
     file { '/srv/mail':
       ensure => 'directory',
       owner => $user,
