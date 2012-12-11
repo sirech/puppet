@@ -174,8 +174,6 @@ class deliver (
     }
 
     # Postfix
-    include postfix
-
     file { '/etc/postfix/main.cf':
       ensure => present,
       content => template("deliver/main.cf.erb")
@@ -195,7 +193,7 @@ class deliver (
       ensure => present
     }
 
-    package { 'mailx':
+    package { 'mailutils':
       ensure => present
     }
 
