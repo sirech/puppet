@@ -114,6 +114,7 @@ class deliver (
       ensure => 'directory',
       owner => $user,
       group => $runner,
+      mode => 664,
       require => File[$directory]
     }
 
@@ -122,7 +123,7 @@ class deliver (
       owner => $user,
       group => $runner,
       path   => "$live/logging.conf",
-      target => "$code/logging.conf",
+      target => "$code/logging.conf.example",
       require => File[$live]
     }
 
