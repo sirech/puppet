@@ -50,7 +50,7 @@ class deliver (
       owner => $mail_sender,
       require => File[$maildir]
     }
-      
+
     file { '/srv/mail':
       ensure => 'directory',
       owner => $user,
@@ -64,6 +64,8 @@ class deliver (
       group => $runner,
       require => File['/srv/mail']
     }
+
+
 
     # Python packages
 
@@ -169,9 +171,48 @@ class deliver (
       user => $db_user,
       password => $db_password,
     }
-      
-    # service { 'deliver':
-    #   ensure => 'running',
-    #   require => ...
-    # }
+
+    # Postfix
+    include postfix
+
+    file { '/etc/postfix/main.cf':
+      ensure => present,
+      content => template("deliver/main.cf.erb")
+    }
+
+    file { '/etc/mailname':
+      ensure  => present,
+      content => template("deliver/mailname.erb")
+    }
+
+    file { '/etc/postfix/virtual':
+      ensure  => present,
+      content => template("deliver/virtual.erb")
+    }
+
+    package { 'postfix':
+      ensure => present
+    }
+
+    package { 'mailx':
+      ensure => present
+    }
+
+    package { 'courier-pop':
+      ensure => present
+    }
+
+    service { 'postfix':
+      ensure    => running,
+      enable    => true,
+      hasstatus => true,
+      restart   => '/etc/init.d/postfix reload',
+      require   => [File['/etc/postfix/main.cf', '/etc/mailname', '/etc/postfix/virtual'], Package['postfix', 'courier-pop']]
+    }
+
+    # Launch the service
+    service { 'deliver':
+      ensure => 'running',
+      require => [File['deliver-start', 'deliver-link'], File['/srv/mail', $directory], Exec['setup.py deliver'], File['deliver-log-link', 'deliver-manifest-link', "$live/members.json", "$live/config.py"], Exec['deliver-binaries-copy'], Postgresql::Db[$db_name], Service['postfix']]
+    }
   }
