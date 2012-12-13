@@ -35,7 +35,13 @@ class deliver (
     user { $mail_sender:
       ensure => 'present',
       managehome => true,
-      password => $mail_password_hash
+      password => "$mail_password_hash"
+    }
+
+    exec { "$mail_sender password":
+      command => "usermod --password \'$mail_password_hash\' $mail_sender",
+      path => '/usr/sbin',
+      require => User[$mail_sender]
     }
 
     $maildir = "/home/$mail_sender/Maildir"
