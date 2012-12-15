@@ -1,4 +1,5 @@
 .vagrant
+modules/shell/files/secrets
 modules/moin/manifests/settings.pp
 modules/deliver/manifests/settings.pp
 modules/deliver/files/members.json

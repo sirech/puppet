@@ -56,7 +56,7 @@ class shell (
     file { 'secrets':
       ensure => 'present',
       path   => "$home/.secrets",
-      content => template("shell/secrets.erb")
+      source => "puppet://modules/shell/secrets"
     }
 
     file { 'bashrc':
