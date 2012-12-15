@@ -28,3 +28,6 @@
 [submodule "modules/timezone"]
 	path = modules/timezone
 	url = git://github.com/saz/puppet-timezone.git
+[submodule "modules/cron"]
+	path = modules/cron
+	url = git://github.com/torrancew/puppet-cron.git

@@ -179,6 +179,18 @@ class deliver (
       password => $db_password,
     }
 
+    # Digests
+    cron::job { 'digests':
+      minute      => '2',
+      hour        => '2,6,18',
+      date        => '*',
+      month       => '*',
+      weekday     => '*',
+      user        => $runner,
+      command     => "cd $live && $virtualenv/bin/python digester.py",
+      environment => [ 'MAILTO=root', 'PATH="/usr/bin:/bin"' ];
+    }
+
     # Postfix
     file { '/etc/postfix/main.cf':
       ensure => present,
