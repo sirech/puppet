@@ -56,7 +56,7 @@ class shell (
     file { 'secrets':
       ensure => 'present',
       path   => "$home/.secrets",
-      source => "puppet://modules/shell/secrets"
+      source => "puppet:///modules/shell/secrets"
     }
 
     file { 'bashrc':
