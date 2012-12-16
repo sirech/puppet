@@ -51,6 +51,7 @@ node server inherits basenode {
 
   user { 'sirech':
     ensure => 'present',
+    shell => 'bash',
     groups => ['adm', 'sudo'],
     managehome => true,
   }
