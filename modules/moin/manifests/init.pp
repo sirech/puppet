@@ -54,6 +54,10 @@ class moin (
       ensure => 'present',
     }
 
+    package { 'uwsgi-plugin-python':
+      ensure => 'present',
+    }
+
     # Moin config
     file { $wiki:
       ensure => 'directory',
