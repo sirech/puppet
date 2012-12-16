@@ -6,6 +6,10 @@ node server inherits basenode {
     ensure => present,
   }
 
+  class { 'timezone':
+    timezone => 'Europe/Berlin'
+  }
+  
   include ntp
 
   class { 'nodejs':
