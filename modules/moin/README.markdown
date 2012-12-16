@@ -19,3 +19,10 @@ variables:
 
 The actual data should be taken from a backup and put in the folder
 `data`, under the path defined by `$wiki`.
+
+### Permissions
+
+Set the correct permissions for the data directories by doing:
+
+    chown -R $user:uwsgi 775 data
+    chown -R $user:uwsgi 775 underlay
