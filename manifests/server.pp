@@ -53,14 +53,9 @@ node server inherits basenode {
     owner => 'sirech'
   }
 
-  user { 'sirech':
-    ensure => 'present',
-    shell => 'bash',
-    groups => ['adm', 'sudo'],
-    managehome => true,
-  }
+  include sirech
 
-  User['sirech'] -> File['/srv/www'] -> File['/srv/www/main'] -> File['/srv/www/images']
+  Class['sirech'] -> File['/srv/www'] -> File['/srv/www/main'] -> File['/srv/www/images']
 
   # Auto complete NodeJS app
   class { 'auto-complete':

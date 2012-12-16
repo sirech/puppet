@@ -54,7 +54,7 @@ remote server before some packages work again
 * Copy the secret configuration files. If the structure is the same,
   just do this:
   
-    scp -r {shell,moin,deliver} root@$hostname:/root/puppet/modules
+    scp -r {sirech,shell,moin,deliver} root@$hostname:/root/puppet/modules
 
 * Run puppet:
 
