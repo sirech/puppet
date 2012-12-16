@@ -34,8 +34,7 @@ class deliver (
 
     user { $mail_sender:
       ensure => 'present',
-      managehome => true,
-      password => "$mail_password_hash"
+      managehome => true
     }
 
     exec { "$mail_sender password":
