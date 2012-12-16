@@ -206,6 +206,13 @@ class deliver (
       content => template("deliver/virtual.erb")
     }
 
+    exec { 'postmap virtual':
+      command => 'postmap virtual',
+      cwd     => '/etc/postfix',
+      path => '/usr/sbin',
+      require => File['/etc/postfix/virtual']
+    }
+
     package { 'postfix':
       ensure => present
     }
@@ -223,7 +230,7 @@ class deliver (
       enable    => true,
       hasstatus => true,
       restart   => '/etc/init.d/postfix reload',
-      require   => [File['/etc/postfix/main.cf', '/etc/mailname', '/etc/postfix/virtual'], Package['postfix', 'courier-pop']]
+      require   => [File['/etc/postfix/main.cf', '/etc/mailname', '/etc/postfix/virtual'], Exec['postmap virtual'], Package['postfix', 'courier-pop']]
     }
 
     # Launch the service
