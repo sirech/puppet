@@ -4,7 +4,8 @@ class shell (
     $home = "/home/$user"
 
     exec { 'git clone shell':
-      command => "git clone git://github.com/sirech/shell $home/shell",
+      command => 'git clone git://github.com/sirech/shell',
+      cwd => $home,
       creates => "$home/shell",
       user => $user,
       group => $user,

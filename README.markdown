@@ -48,6 +48,8 @@ remote server before some packages work again
 * Clone this repository:
 
     git clone git://github.com/sirech/puppet
+    cd puppet
+    git submodule init && git submodule update
     
 * Copy the secret configuration files. If the structure is the same,
   just do this:

@@ -97,8 +97,8 @@ class deliver (
 
     exec {
       'git clone deliver':
-        command => "git clone git://github.com/sirech/deliver.git",
-        cwd => "$directory",
+        command => 'git clone git://github.com/sirech/deliver.git',
+        cwd => $directory,
         creates => $code,
         user => $user,
         group => $runner,

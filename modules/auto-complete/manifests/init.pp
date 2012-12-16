@@ -24,7 +24,8 @@ class auto-complete (
     }
 
     exec { 'git clone stock-display':
-      command => "git clone git://github.com/sirech/stock-display.git $full_path",
+      command => 'git clone git://github.com/sirech/stock-display.git',
+      cwd => $directory,
       creates => $full_path,
       user => $user,
       path => '/usr/bin',
