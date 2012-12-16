@@ -236,6 +236,6 @@ class deliver (
     # Launch the service
     service { 'deliver':
       ensure => 'running',
-      require => [File['deliver-start', 'deliver-link'], File['/srv/mail', $directory], Exec['setup.py deliver'], File['deliver-log-link', 'deliver-manifest-link', "$live/members.json", "$live/config.py"], Exec['deliver-binaries-copy'], Postgresql::Db[$db_name], Service['postfix']]
+      require => [File['deliver-start', 'deliver-link'], File['/srv/mail', $directory], Exec['setup.py deliver'], File['deliver-log-link', 'deliver-manifest-link', "$live/members.json", "$live/config.py"], Exec['deliver-binaries-copy'], Service['postfix']]
     }
   }
