@@ -26,3 +26,7 @@ Set the correct permissions for the data directories by doing:
 
     chown -R $user:uwsgi 775 data
     chown -R $user:uwsgi 775 underlay
+
+### System pages
+
+The system pages have to be downloaded and installed manually. Go `to http://${wiki_address}/LanguageSetup`, install all the sites, and restart the wiki.
