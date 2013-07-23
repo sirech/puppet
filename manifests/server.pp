@@ -2,14 +2,10 @@ import "base"
 
 node server inherits basenode {
 
-  package { 'build-essential':
-    ensure => present,
-  }
-
   class { 'timezone':
     timezone => 'Europe/Berlin'
   }
-  
+
   include ntp
 
   class { 'nodejs':
@@ -22,6 +18,10 @@ node server inherits basenode {
     version => '2.7',
     dev => true,
     virtualenv => true,
+  }
+
+  class { ruby:
+    version => '2.0.0-p247'
   }
 
   # Main site

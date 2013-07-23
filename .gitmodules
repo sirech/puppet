@@ -31,3 +31,6 @@
 [submodule "modules/cron"]
 	path = modules/cron
 	url = git://github.com/torrancew/puppet-cron.git
+[submodule "modules/ruby"]
+	path = modules/ruby
+	url = git://github.com/lucaspiller/puppet-ruby.git
