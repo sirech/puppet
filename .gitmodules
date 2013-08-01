@@ -34,3 +34,6 @@
 [submodule "modules/ruby"]
 	path = modules/ruby
 	url = git://github.com/lucaspiller/puppet-ruby.git
+[submodule "modules/thin"]
+	path = modules/thin
+	url = git://github.com/camptocamp/puppet-thin
