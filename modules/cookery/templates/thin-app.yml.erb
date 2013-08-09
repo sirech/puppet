@@ -1,0 +1,13 @@
+# <%= @app %>.yml
+address: localhost
+port: <%= @port %>
+tag: <%= @app %>
+chdir: <%= @directory %>/current
+user: <%= @runner %>
+group: <%= @runner %>
+rackup: <%= @directory %>/current/config.ru
+log: <%= scope.lookupvar('thin_log') %>/<%= @app %>.log
+pid: <%= scope.lookupvar('thin_run') %>/<%= @app %>.pid
+daemonize: true
+servers: 1
+environment: production

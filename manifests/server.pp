@@ -24,6 +24,13 @@ node server inherits basenode {
     version => '2.0.0-p247'
   }
 
+  exec { 'rake':
+    command => 'gem install rake',
+    path => ['/bin', '/usr/bin'],
+    unless => 'gem list | grep rake',
+    require => Class[ruby]
+  }
+
   # Main site
   nginx::resource::vhost { 'hceris.com':
     ensure   => present,
@@ -71,5 +78,9 @@ node server inherits basenode {
 
   # Deliver mailing list
   class { 'deliver':
+  }
+
+  # Cookery app
+  class { 'cookery':
   }
 }
