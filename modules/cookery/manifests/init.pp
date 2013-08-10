@@ -21,6 +21,12 @@ class cookery (
       require => [File['/srv/www'], User[$user, $runner]]
     }
 
+    nginx::vhost { 'cookery.hceris.com':
+      template => 'cookery/cookery.erb',
+      docroot => "$directory/current",
+      port => $port
+    }
+
     # DB
     postgresql::db { $db_name:
       user => $db_user,
@@ -82,35 +88,4 @@ class cookery (
       notify => Service['thin'],
       require => File[$thin_config]
     }
-
-    # nginx::vhost { 'cookery.hceris.com':
-    #   template => 'cookery/cookery.erb',
-    #   docroot => $full_path,
-    #   port => 3023
-    # }
-
-
-
-    # exec { 'git clone cookery':
-    #   command => 'git clone git://github.com/sirech/cookery.git',
-    #   cwd => $directory,
-    #   creates => $full_path,
-    #   user => $user,
-    #   path => '/usr/bin',
-    #   require => File['/srv/www']
-    # }
-
-    # file { 'auto-start-packages':
-    #   path => "$full_path/auto-complete-server/node_modules",
-    #   owner => $user,
-    #   group => $user,
-    #   recurse => true,
-    #   require => Exec['npm install stock-display'],
-    # }
-
-    # service { 'auto-complete-server':
-    #   ensure => 'running',
-    #   require => File['auto-start', 'auto-start-link', 'auto-start-packages']
-    # }
-
   }
