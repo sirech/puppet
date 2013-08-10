@@ -6,7 +6,7 @@ class cookery (
   $thin_user = 'thin',
   $thin_config = '/etc/thin.d',
   $thin_log = '/var/log/thin',
-  $thin_run = '/var/run/thin') {
+  $thin_run = '/var/run/thin') inherits cookery::settings {
 
     $directory = "/srv/www/${app}"
 
@@ -14,11 +14,24 @@ class cookery (
       ensure => 'present'
     }
 
-    file { $directory:
+    file { [$directory, "$directory/shared", "$directory/shared/config"]:
       ensure => 'directory',
       owner => $user,
       group => $runner,
       require => [File['/srv/www'], User[$user, $runner]]
+    }
+
+    # DB
+    postgresql::db { $db_name:
+      user => $db_user,
+      password => $db_password,
+    }
+
+    file { 'database.yml':
+      ensure => 'present',
+      path   => "$directory/shared/config/database.yml",
+      content => template("cookery/database.yml.erb"),
+      require => File["$directory/shared/config"]
     }
 
     # Thin

@@ -31,6 +31,9 @@ node server inherits basenode {
     require => Class[ruby]
   }
 
+  class { 'postgresql::server':
+  }
+
   # Main site
   nginx::resource::vhost { 'hceris.com':
     ensure   => present,

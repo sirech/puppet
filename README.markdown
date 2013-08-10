@@ -20,7 +20,7 @@ get a _VM_ running:
 * Prepare _VM_
 
     vagrant up
-    
+
 * Connect to the _VM_
 
     vagrant ssh
@@ -37,26 +37,26 @@ remote server before some packages work again
 * Install _git_ and _puppet_:
 
     apt-get update && apt-get install git puppet
-    
+
 * Set the hostname:
 
     echo "$hostname" > /etc/hostname
     hostname -F /etc/hostname
-    
+
 * Edit `/etc/hosts` and add the hostname there too.
 
 * Clone this repository:
 
     git clone git://github.com/sirech/puppet --recursive
-    
+
 * Copy the secret configuration files. If the structure is the same,
   just do this:
-  
-    scp -r {sirech,shell,moin,deliver} root@$hostname:/root/puppet/modules
+
+    scp -r {sirech,shell,moin,deliver,cookery} root@$hostname:/root/puppet/modules
 
 * Run puppet:
 
     puppet apply manifests/site-${hostname}.pp --modulepath modules
-    
-    
+
+
 

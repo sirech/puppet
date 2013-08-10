@@ -170,9 +170,6 @@ class deliver (
     }
 
     # DB
-    class { 'postgresql::server':
-    }
-
     postgresql::db { $db_name:
       user => $db_user,
       password => $db_password,
