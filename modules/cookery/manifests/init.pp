@@ -62,13 +62,13 @@ class cookery (
 
     file { 'thin-start':
       ensure => 'present',
-      path   => "/etc/init/thin.conf",
-      content => template("cookery/thin.conf.erb")
+      path   => "/etc/init/cookery.conf",
+      content => template("cookery/cookery.conf.erb")
     }
 
     file { 'thin-start-link':
       ensure => symlink,
-      path   => "/etc/init.d/thin",
+      path   => "/etc/init.d/cookery",
       target => '/lib/init/upstart-job',
     }
 

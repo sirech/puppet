@@ -1,0 +1,7 @@
+description "cookery thin webserver"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+exec bundle exec thin start -C <%= thin_config %>/<%= app %>.yml
+respawn

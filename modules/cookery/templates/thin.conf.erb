@@ -1,7 +1,0 @@
-description "thin webserver"
-
-start on runlevel [2345]
-stop on runlevel [!2345]
-
-exec thin start --all <%= thin_config %>
-respawn
