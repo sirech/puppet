@@ -13,3 +13,9 @@ following variables:
     $db_name
     $db_user
     $db_password
+
+### Capistrano
+
+The code for this service is supposed to be deployed via
+Capistrano. This module only installs the required packages and
+folders for a normal `cap deploy` to work.
