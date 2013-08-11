@@ -3,5 +3,6 @@ description "cookery thin webserver"
 start on runlevel [2345]
 stop on runlevel [!2345]
 
+chdir <%= directory %>/current
 exec bundle exec thin start -C <%= thin_config %>/<%= app %>.yml
 respawn
