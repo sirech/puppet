@@ -7,7 +7,7 @@ user: <%= @runner %>
 group: <%= @runner %>
 rackup: <%= @directory %>/current/config.ru
 log: <%= scope.lookupvar('thin_log') %>/<%= @app %>.log
-pid: <%= scope.lookupvar('thin_run') %>/<%= @app %>.pid
+pid: <%= @pids %>/<%= @app %>.pid
 daemonize: true
 servers: 1
 environment: production

@@ -5,16 +5,20 @@ class cookery (
   $port = 4023,
   $thin_user = 'thin',
   $thin_config = '/etc/thin.d',
-  $thin_log = '/var/log/thin',
-  $thin_run = '/var/run/thin') inherits cookery::settings {
+  $thin_log = '/var/log/thin') inherits cookery::settings {
 
     $directory = "/srv/www/${app}"
+    $pids = "$directory/shared/pids"
+
+    package { 'imagemagick':
+      ensure => 'latest'
+    }
 
     user { $runner:
       ensure => 'present'
     }
 
-    file { [$directory, "$directory/shared", "$directory/shared/config"]:
+    file { [$directory, "$directory/shared", "$directory/shared/config", "$pids"]:
       ensure => 'directory',
       owner => $user,
       group => $runner,
@@ -55,13 +59,6 @@ class cookery (
       group => $thin_user
     }
 
-    file { $thin_run:
-      ensure => 'directory',
-      mode => '1777',
-      owner => $runner,
-      group => $runner
-    }
-
     file { 'thin-start':
       ensure => 'present',
       path   => "/etc/init/thin.conf",
@@ -77,7 +74,7 @@ class cookery (
     service { 'thin':
       ensure => 'running',
       hasrestart => true,
-      require => [Package['thin'], User[$thin_user], File[$thin_config, $thin_log, $thin_run, 'thin-start', 'thin-start-link']]
+      require => [Package['thin'], User[$thin_user], File[$thin_config, $thin_log, 'thin-start', 'thin-start-link']]
     }
 
     file { "${thin_config}/${app}.yml":
