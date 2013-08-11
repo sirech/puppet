@@ -28,6 +28,7 @@ class cookery (
     nginx::vhost { 'cookery.hceris.com':
       template => 'cookery/cookery.erb',
       docroot => "$directory/current",
+      create_docroot => false,
       port => $port
     }
 
