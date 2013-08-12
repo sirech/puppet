@@ -1,21 +1,36 @@
+upstream cookery {
+   server unix:<%= sockets %>/thin.0.sock max_fails=1 fail_timeout=15s;
+}
+
 server {
   server_name <%= name %>;
 
   access_log <%= scope.lookupvar('nginx::log_dir')%>/<%= name %>.access.log;
   error_log <%= scope.lookupvar('nginx::log_dir')%>/<%= name %>.error.log;
+  keepalive_timeout 5;
+  root <%= directory %>/current/public;
+
+  location @app {
+     proxy_pass http://cookery;
+  }
 
   location / {
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_set_header X-NginX-Proxy true;
-    proxy_pass http://127.0.0.1:<%= port %>;
-    proxy_redirect off;
+
+    try_files $uri/index.html $uri.html $uri @app;
+
+    error_page 404              /404.html;
+    error_page 422              /422.html;
+    error_page 500 502 503 504  /500.html;
+    error_page 403              /403.html;
   }
 
   location ~ ^/(assets)/  {
-    root <%= $directory %>/shared;
     gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  location = /favicon.ico {
     expires max;
     add_header Cache-Control public;
   }

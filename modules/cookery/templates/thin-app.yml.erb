@@ -1,6 +1,5 @@
 # <%= @app %>.yml
 address: localhost
-port: <%= @port %>
 tag: <%= @app %>
 chdir: <%= @directory %>/current
 user: <%= @runner %>
@@ -11,3 +10,4 @@ pid: <%= @pids %>/<%= @app %>.pid
 daemonize: true
 servers: 1
 environment: production
+socket: <%= @sockets %>/thin.sock

@@ -2,13 +2,14 @@ class cookery (
   $app = 'cookery',
   $user = 'sirech',
   $runner = 'cook',
-  $port = 4023,
   $thin_user = 'thin',
   $thin_config = '/etc/thin.d',
   $thin_log = '/var/log/thin') inherits cookery::settings {
 
     $directory = "/srv/www/${app}"
-    $pids = "$directory/shared/pids"
+    $shared = "$directory/shared"
+    $pids = "$shared/pids"
+    $sockets = "$shared/sockets"
 
     package { 'imagemagick':
       ensure => 'latest'
@@ -18,7 +19,7 @@ class cookery (
       ensure => 'present'
     }
 
-    file { [$directory, "$directory/shared", "$directory/shared/config", "$pids"]:
+    file { [$directory, "$shared", "$shared/config", "$pids", "$sockets"]:
       ensure => 'directory',
       owner => $user,
       group => $runner,
@@ -28,8 +29,7 @@ class cookery (
     nginx::vhost { 'cookery.hceris.com':
       template => 'cookery/cookery.erb',
       docroot => "$directory/current",
-      create_docroot => false,
-      port => $port
+      create_docroot => false
     }
 
     # DB
