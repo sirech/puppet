@@ -23,6 +23,7 @@ class cookery (
       ensure => 'directory',
       owner => $user,
       group => $runner,
+      mode => 0664,
       require => [File['/srv/www'], User[$user, $runner]]
     }
 
