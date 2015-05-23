@@ -6,4 +6,4 @@ modules/deliver/files/members.json
 modules/deliver/files/config.py
 modules/cookery/manifests/settings.pp
 modules/sirech/manifests/settings.pp
-modules/sirech/files/authorized_keys
+modules/sirech/files/

@@ -27,6 +27,24 @@ class sirech () inherits sirech::settings {
     require => File[$ssh]
   }
 
+  file { "$ssh/id_rsa":
+    ensure => present,
+    owner => $user,
+    group => $user,
+    mode => 660,
+    source => "puppet:///modules/sirech/id_rsa",
+    require => File[$ssh]
+  }
+
+  file { "$ssh/id_rsa.pub":
+    ensure => present,
+    owner => $user,
+    group => $user,
+    mode => 660,
+    source => "puppet:///modules/sirech/id_rsa.pub",
+    require => File[$ssh]
+  }
+
   exec { "$user password":
       command => "usermod --password \'$password_hash\' $user",
       path => '/usr/sbin',
